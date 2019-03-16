@@ -11,7 +11,7 @@ php artisan migrate
 
 
 2. Seed DB:  
-`database\seeds\DatabaseSeeder.php`
+[database/seeds/DatabaseSeeder.php](./database/seeds/DatabaseSeeder.php)
 ```
 factory(App\User::class, 50)->create();
 ```
@@ -23,14 +23,14 @@ and run `php artisan db:seed`
 
 
 4. Setup REST API routing
-`routes\api.php`
+[routes/api.php](./routes/api.php)
 ```
 Route::apiResource('users', 'Api\UserController');
 ```
 
 
 5. Implement business logic:  
-`app\Http\Controllers\Api\UserController.php`
+[app/Http/Controllers/Api/UserController.php](./app/Http/Controllers/Api/UserController.php)
 
 Import Model:  
 ```
@@ -39,20 +39,26 @@ use App\User;
 
 @index:  
 ```
-// return User:all();
 return User::paginate(15);
 ```
 
+
+Import Util:  
+```
+use Illuminate\Support\Facades\Hash;
+```
 @store:  
 ```
-// return User:all();
-return User::paginate(15);
+return User::create([
+  'name' => $request->name,
+  'email' => $request->email,
+  'password' => Hash::make($request->password),
+]);
 ```
 
 
 @show:  
 ```
-// return User::find($id);
 return $user;
 ```
 
@@ -60,6 +66,7 @@ return $user;
 ```
 $user->name = $request->name;
 $user->email = $request->email;
+$user->password = Hash::make($request->password);
 $user->save();
 return $user;
 ```

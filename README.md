@@ -36,3 +36,35 @@ Import Model:
 ```
 use App\User;
 ```
+
+@index:  
+```
+// return User:all();
+return User::paginate(15);
+```
+
+@store:  
+```
+// return User:all();
+return User::paginate(15);
+```
+
+
+@show:  
+```
+// return User::find($id);
+return $user;
+```
+
+@update:  
+```
+$user->name = $request->name;
+$user->email = $request->email;
+$user->save();
+return $user;
+```
+
+@destroy:  
+```
+return $user->delete();
+```

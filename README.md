@@ -75,5 +75,7 @@ return $user;
 
 @destroy:  
 ```
-return $user->delete();
+return [
+  'success' => $user->delete()
+];
 ```

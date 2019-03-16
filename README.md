@@ -39,7 +39,9 @@ use App\User;
 
 @index:  
 ```
-return User::paginate(15);
+// return User::all();
+// return User::paginate(15);
+return User::orderBy('id', 'desc')->paginate(15);
 ```
 
 
